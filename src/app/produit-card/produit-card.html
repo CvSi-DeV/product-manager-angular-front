@@ -1,6 +1,9 @@
 <div>
-  <h3>{{ nom }}</h3>
-  <p>{{ prix }}</p>
-  <p>{{ stock }}</p>
-  <p>{{ categorie }}</p>
+  <h3>{{ produit().nom }}</h3>
+  <p>{{ produit().prix }}</p>
+  <p>{{ produit().categorie }}</p>
+  @if (produit().pourcentagePromo) {
+    <p>Promo : {{ produit().pourcentagePromo }}</p>
+  }
+  <p>{{ prixFinal() }}</p>
 </div>

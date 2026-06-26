@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
+import { Produit } from '../models/produit.interface';
 
 @Component({
   selector: 'app-produit-card',
@@ -7,8 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './produit-card.scss',
 })
 export class ProduitCard {
-  nom: string = 'T-Shirt';
-  prix: number = 49.9;
-  stock: number = 15;
-  categorie: string = 'Vetements';
+  produit = input.required<Produit>();
+
+  prixFinal = computed(() => {
+    const produit = this.produit();
+    return produit.pourcentagePromo
+      ? produit.prix * (1 - produit.pourcentagePromo / 100)
+      : produit.prix;
+  });
 }

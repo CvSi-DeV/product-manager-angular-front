@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProduitCard } from '../produit-card/produit-card';
+import { ProduitService } from '../services/produit.service';
 
 @Component({
   selector: 'app-produit-list',
@@ -7,4 +8,7 @@ import { ProduitCard } from '../produit-card/produit-card';
   templateUrl: './produit-list.html',
   styleUrl: './produit-list.scss',
 })
-export class ProduitList {}
+export class ProduitList {
+  private produitService = inject(ProduitService);
+  produitList = this.produitService.getProduits();
+}
