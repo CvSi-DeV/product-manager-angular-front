@@ -1,9 +1,19 @@
-<div>
+<div class="card" [class.rupture]="produit().stock === 0">
   <h3>{{ produit().nom }}</h3>
-  <p>{{ produit().prix }}</p>
-  <p>{{ produit().categorie }}</p>
-  @if (produit().pourcentagePromo) {
-    <p>Promo : {{ produit().pourcentagePromo }}</p>
+
+  <span class="badge-categorie">{{ produit().categorie }}</span>
+  <div>
+    <span class="prix" [class.barre]="!!produit().pourcentagePromo">{{ produit().prix }}</span>
+    @if (produit().pourcentagePromo) {
+      <div>
+        <span class="badge-promo">Promo : {{ produit().pourcentagePromo }}%</span>
+        <p class="prix">{{ prixFinal() }}</p>
+      </div>
+    }
+  </div>
+  @if (!produit().stock) {
+    <span class="stock-rupture">En rupture</span>
+  } @else {
+    <span class="stock-ok">En stock &#40;{{ produit().stock }}&#41;</span>
   }
-  <p>{{ prixFinal() }}</p>
 </div>
